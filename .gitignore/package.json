@@ -1,14 +1,15 @@
-
+{
   "name": "dungeonbot",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "Dungeons bot is a bot that helps you for your Skyblock Dungeons experience. Includes many things such as a full guide for every boss and puzzle training!",
+  "main": "menu.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "test"
   },
-  "author": "",
+  "author": "IceGod",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^12.3.1"
   }
 }
+
