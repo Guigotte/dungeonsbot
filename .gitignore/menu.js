@@ -1,15 +1,15 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const fs = require("fs");
+const config = require('./config.json');
 
 var prefix = ("*")
 var footer = ("Dungeons Bot by IceGod#7002 | Tout droits réservés")
 var invisible = (" 󠇰󠇰  ")
 
-const fs = require("fs");
+longcode = require("./longcode");
 
-longc = require("./longcode");
-
-client.login(process.env.TOKEN);
+client.login(config.token);
 
 client.on('ready', function() {
     client.user.setStatus("idle")
@@ -26,8 +26,11 @@ client.on('ready', function() {
     if(message.author.bot) return;
 
     if (msg.startsWith (prefix + "help")){
-        message.delete();
-      var embed = new Discord.MessageEmbed()
+      if (message.channel.type === 'dm') return;
+      if (message.guild.me.hasPermission("MANAGE_MESSAGES")){
+            message.delete();
+          }
+      var helpembed = new Discord.MessageEmbed()
           .setTitle(":question: Need help? Here is the bot's Command list: :question:")
           .setDescription(` 󠇰󠇰  `)
           .setColor("#f5980c")
@@ -39,17 +42,21 @@ client.on('ready', function() {
           .addField(invisible, field)         
           .setImage("https://cdn.discordapp.com/attachments/746432034054078635/747555898876100628/hiderdungeon.png")
           .setFooter(footer)
-      message.channel.send(embed)
+      message.channel.send(helpembed)
       console.log(`❔ ${message.author.tag} used Help`)
     }
-
+    
     if (msg.startsWith (prefix + "update")){
+      if (message.channel.type === 'dm') return;
+      if (message.guild.me.hasPermission("MANAGE_MESSAGES")){
+        message.delete();
+      }
       var embed = new Discord.MessageEmbed()
           .setTitle(":dvd: As the bot is in developpement, here is all the updates/flaws regarding the bot :dvd:")
           .setDescription(" 󠇰󠇰  ")
           .setColor("#f5980c")
-          .addField(":desktop: Version:", "0.0.1 | Alpha")
-          .addField(":cd: Finished commands:", "*class")
+          .addField(":desktop: Version:", "0.1 | Beta")
+          .addField(":cd: Finished commands:", "*class, *starter")
           .addField(":x: Unfinished commands:", "*help (Image and new commands), *mail (Can send empty msg's)")
           .addField(invisible, field)
           .setFooter(footer)
@@ -58,6 +65,9 @@ client.on('ready', function() {
     }
 
 //  if (msg.startsWith (prefix + "mail")){
+//    if (message.guild.me.hasPermission("MANAGE_MESSAGES")){
+//      message.delete();
+//    }
 //    if (mention == null) { return; }
 //    message.delete();
 //    mentionMessage = message.content.slice (28);
@@ -72,6 +82,10 @@ client.on('ready', function() {
 //  }
 
   if (msg.startsWith (prefix + "pelpinobambino")){
+    if (message.channel.type === 'dm') return;
+    if (message.guild.me.hasPermission("MANAGE_MESSAGES")){
+      message.delete();
+    }
     if (mention == null) { return; }
     var embed = new Discord.MessageEmbed()
         .setTitle(`:wave: Bien le bonjour :wave:`)
